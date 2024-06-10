@@ -34,3 +34,11 @@
         }
     }
 }
+
+@media (max-width: 767px){
+    .button {
+        max-width: 30%;
+        align-items: center;
+        margin:auto
+    }
+}
