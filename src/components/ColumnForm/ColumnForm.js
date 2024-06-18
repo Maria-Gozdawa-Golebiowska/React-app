@@ -8,34 +8,35 @@ const ColumnForm = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.action({ title: title, icon: icon });
+        props.action({ title, icon });
         setTitle('');
         setIcon('');
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
-            <label className={styles.label}>
-                Title:
+        <form onSubmit={handleSubmit} className={styles.columnForm}>
+            <div className={styles.fieldGroup}>
+                <label className={styles.label}>Title:</label>
                 <input 
                     type="text" 
                     value={title} 
                     onChange={e => setTitle(e.target.value)} 
                     className={styles.input}
                 />
-            </label>
-            <label className={styles.label}>
-                Icon:
+            </div>
+            <div className={styles.fieldGroup}>
+                <label className={styles.label}>Icon:</label>
                 <input 
                     type="text" 
                     value={icon} 
                     onChange={e => setIcon(e.target.value)} 
                     className={styles.input}
                 />
-            </label>
+            </div>
             <Button className={styles.button}>Add column</Button>
         </form>
     );
 };
 
 export default ColumnForm;
+
