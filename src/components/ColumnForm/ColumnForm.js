@@ -1,42 +1,43 @@
 import { useState } from 'react';
 import Button from '../Button/Button';
 import styles from './ColumnForm.module.scss';
+import { useDispatch } from 'react-redux';
+import TextInput from '../TextInput/TextInput';
 
-const ColumnForm = props => {
-    const [title, setTitle] = useState('');
-    const [icon, setIcon] = useState('');  
+
+const ColumnForm = (props) => {
+    const [title, setTitle] = useState("");
+    const [icon, setIcon] = useState("");
 
     const handleSubmit = e => {
         e.preventDefault();
-        props.action({ title, icon });
+        dispatch({ type: 'ADD_COLUMN', payload: { title, icon } });
         setTitle('');
         setIcon('');
-    };
+     };
+     const dispatch = useDispatch();
 
-    return (
-        <form onSubmit={handleSubmit} className={styles.columnForm}>
-            <div className={styles.fieldGroup}>
-                <label className={styles.label}>Title:</label>
-                <input 
-                    type="text" 
-                    value={title} 
-                    onChange={e => setTitle(e.target.value)} 
-                    className={styles.input}
-                />
-            </div>
-            <div className={styles.fieldGroup}>
-                <label className={styles.label}>Icon:</label>
-                <input 
-                    type="text" 
-                    value={icon} 
-                    onChange={e => setIcon(e.target.value)} 
-                    className={styles.input}
-                />
-            </div>
-            <Button className={styles.button}>Add column</Button>
+
+     return (
+        <form className={styles.columnForm} onSubmit={handleSubmit}>
+          <span>Title:</span>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            className={styles.inputStyle}
+          />
+          <span className={styles.inputText}>Icon: </span>
+          <input
+            type="text"
+            value={icon}
+            onChange={(e) => setIcon(e.target.value)}
+            className={styles.inputStyle}
+          />
+          <Button>add Column</Button>
         </form>
-    );
-};
+      );
+    }
 
 export default ColumnForm;
 
