@@ -6,49 +6,51 @@ import { strContains } from "../utils/strContains";
 // Selectors
 export const getFilteredCards = ({ cards, searchString }, columnId) =>
   cards.filter(card => card.columnId === columnId && strContains(card.title, searchString));
-  export const getAllColumns = (state => state.columns);
-  export const getColumnsByList = ({ columns }, listId) => columns.filter(column => column.listId === listId);
-  export const getListById = ({ lists }, listId) => lists.find(list => list.id === listId);
 
+export const getListById = ({ lists }, listId) =>
+  lists.find(list => list.id === listId);
+
+export const getColumnsByList = (state, listId) =>
+  state.columns.filter(column => column.listId === listId);
+
+export const getAllLists = state => state.lists;
+
+export const getAllColumns = state => state.columns;
 
 // Action creators
 export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
 export const addCard = payload => ({ type: 'ADD_CARD', payload });
-export const addList = payload => ({ type: 'ADD_LIST', payload });
 export const updateSearchString = payload => ({ type: 'UPDATE_SEARCHSTRING', payload });
+export const addList = payload => ({type: 'ADD_LIST', payload});
 
-// Reducer function
-const reducer = (state, action) => {
+// Reducer
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_COLUMN":
       return {
         ...state,
-        columns: [...state.columns, { ...action.payload, id: shortid() }],
+        columns: [...state.columns, { ...action.payload, id: shortid.generate() }],
       };
     case "ADD_CARD":
       return {
         ...state,
-        cards: [...state.cards, { ...action.payload, id: shortid() }],
-      };
-    case 'ADD_LIST':
-      return {
-        ...state,
-        lists: [...state.lists, { ...action.payload, id: shortid() }]
+        cards: [...state.cards, { ...action.payload, id: shortid.generate() }],
       };
     case "UPDATE_SEARCHSTRING":
-      return {
-        ...state,
-        searchString: action.payload
-      };
-    default:
-      return state;
+      return { ...state, searchString: action.payload };
+      case "ADD_LIST":
+        return {
+          ...state,
+          lists: [...state.lists, { ...action.payload, id: shortid.generate() }],
+        };
+      default:
+        return state;
   }
 };
 
-// Create Redux store
+// Store
 const store = createStore(
   reducer,
-  initialState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
