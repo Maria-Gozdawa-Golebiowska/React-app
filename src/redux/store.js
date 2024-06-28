@@ -18,9 +18,11 @@ export const getAllLists = state => state.lists;
 export const getAllColumns = state => state.columns;
 
 export const getFavoriteCard = (state) => {
-  console.log('State in getFavoriteCard:', state); // Add this log
+  console.log('State in getFavoriteCard:', state);
   return state.cards.filter(card => card.isFavorite);
 };
+
+
 
 // Action creators
 export const addColumn = payload => ({ type: 'ADD_COLUMN', payload });
