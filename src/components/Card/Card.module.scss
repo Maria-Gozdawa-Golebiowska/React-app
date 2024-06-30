@@ -8,15 +8,21 @@
   margin: 0 0 16px 0;
   border-radius: 8px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   font-weight: bold;
   color: #333333;
 }
 
+.icons {
+  display: flex;
+  gap: 8px; }
+
 .button {
   border: none;
   cursor: pointer;
-  background: none; 
+  background: none;
+  display: flex;
+  align-items: center;
 }
 
 .button:hover {
@@ -24,5 +30,8 @@
 }
 
 .favorite {
-  color: rgba(244, 80, 16, 0.89); 
+  color: red;
+}
+.trashButton:hover {
+  color: red; 
 }

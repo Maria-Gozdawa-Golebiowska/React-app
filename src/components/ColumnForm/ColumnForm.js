@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { addColumn } from "../../redux/store";
 import styles from "./ColumnForm.module.scss";
+import { useState } from "react";
 import Button from "../Button/Button";
+import { useDispatch } from 'react-redux';
+import { addColumn } from "../../redux/columnsRedux";
 
-const ColumnForm = ({ listId }) => {
+const ColumnForm = (props) => {
   const [title, setTitle] = useState("");
   const [icon, setIcon] = useState("");
 
@@ -12,10 +12,10 @@ const ColumnForm = ({ listId }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(addColumn({ title, icon, listId }));
+    dispatch(addColumn({ title, icon, listId: props.listId}));
     setTitle('');
     setIcon('');
-  };
+ };
 
   return (
     <form className={styles.columnForm} onSubmit={handleSubmit}>
@@ -37,5 +37,4 @@ const ColumnForm = ({ listId }) => {
     </form>
   );
 };
-
 export default ColumnForm;
